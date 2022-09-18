@@ -1,3 +1,57 @@
 #openstack 
 #openstack ussuri
 #allinone machine or single node
+#hostnamectl set-hostname "openstack.gondez.local"
+#exec bash
+#hostnamectl
+//config host and hostname
+#echo -e "10.0.2.100\openstack.gondez.local" >> /etc/hosts
+#cat /etc/hosts
+
+//disable network mamager
+#systemctl stop NetworkManager
+#systemctl disable NetworkManager
+//install network-script configuration
+#dnf install -y network-scripts
+//change ip address interface to static configuration
+
+//openstack repositories packstack
+#dnf config-manager --enable POwerTools
+#dnf install -y centos-release-openstack-ussuri
+#dnf install -y centos-release-openstack-ussuri
+//disable firewall and selinux
+#systemctl stop firewalld
+#systemctl disable firewalld
+#sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+#setenforce 0
+#getenforce
+//output : Permissive
+#dnf update -y
+#reboot
+
+//install packstack
+#dnf install -y openstack-packstack
+#packstack --gen-answer-file /root/answer.txt
+#nano /root/answer.txt
+..................
+CONFIG_NEUTRON_ML2_MECHANISM_DRIVERS=ovn
+CONFIG_NEUTRON_L2_AGENT=ovn
+CONFIG_NEUTRON_OVN_BRIDGE_MAPPINGS=extnet:br-ex
+CONFIG_NEUTRON_OVN_BRIDGE_IFACES=br-ex:ens3
+CONFIG_NEUTRON_OVN_BRIDGES_COMPUTE=br-ex
+CONFIG_NEUTRON_OVN_EXTERNAL_PHYSNET=extnet
+CONFIG_SWIFT_STORAGES=/dev/sdc2 //jika hdd ada dua
+CONFIG_PROVISION_DEMO=n
+CONFIG_HEAT_INSTALL=y
+CONFIG_HEAT_CFN_INSTALL=y
+CONFIG_CEILOMETER_INSTALL=y
+CONFIG_MAGNUM_INSTALL=y
+CONFIG_LBAAS_INSTALL=y
+CONFIG_CINDER_VOLUMES_CREATE=y
+CONFIG_NOVA_SCHED_RAM_ALLOC_RATIO=3.0
+CONFIG_NOVA_LIBVIRT_VIRT_TYPE=%{::default_hypervisor}
+CONFIG_HORIZON_SSL=n
+..................
+//install 
+#packstack --answer-file /root/answer.txt
+
