@@ -1,2 +1,3 @@
 #openstack 
 #openstack ussuri
+#allinone machine or single node
