@@ -16,7 +16,7 @@
 //change ip address interface to static configuration
 
 //openstack repositories packstack
-#dnf config-manager --enable POwerTools
+#dnf config-manager --enable PowerTools
 #dnf install -y centos-release-openstack-ussuri
 #dnf install -y centos-release-openstack-ussuri
 //disable firewall and selinux
