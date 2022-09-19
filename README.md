@@ -3,8 +3,8 @@ configuration packstack ussuri in one machine\
 \
 lab using virtualbox and centos 8 stream\
 2 virtual hdd drive : \
-____|---- 1 hdd for openstack\
-____|---- 1 hdd for cinder and swift\
+|---- 1 hdd for openstack\
+|---- 1 hdd for cinder and swift\
 \
 2 interface ethernet : \
 |---- 1 interface nat network (vbox service)\
