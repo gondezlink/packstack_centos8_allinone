@@ -4,6 +4,8 @@
 #hostnamectl set-hostname "openstack.gondez.local"
 #exec bash
 #hostnamectl
+#putty log H:\Openstack lab\putty_log\&H_&Y&M&D_&T.txt
+
 //config host and hostname
 #echo -e "10.0.2.100\openstack.gondez.local" >> /etc/hosts
 #cat /etc/hosts
@@ -80,6 +82,7 @@ iscsi_helper=lioadm
 volume_group=cinder-volumes
 volumes_dir=/var/lib/cinder/volumes
 ............
+
 //restart service cinder
 # systemctl restart openstack-cinder-volume
 # systemctl restart openstack-cinder-api
@@ -105,5 +108,5 @@ volumes_dir=/var/lib/cinder/volumes
 //download cirros image instance
 # source keystonerc_admin
 # wget https://download.cirros-cloud.net/0.5.2/cirros-0.5.2-x86_64-disk.img
-# openstack image  create --disk-format qcow2 --container-format bare --file cirros-0.5.2-x86_64-disk.img cirros
+# openstack image  create --disk-format qcow2 --container-format bare --public --file cirros-0.5.2-x86_64-disk.img cirros
 
