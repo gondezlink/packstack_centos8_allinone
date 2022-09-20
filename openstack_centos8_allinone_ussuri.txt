@@ -93,9 +93,11 @@ volumes_dir=/var/lib/cinder/volumes
 
 //create neutron router
 # neutron router-create dev-router
+# neutron router-gateway-set dev-router external_network
 
 //create neutron pvt-net
 # neutron net-create pvt_net
+# neutron subnet-create --name pvt_subnet pvt_net 10.20.1.0/24
 
 //add pvt-net to router neutron
 # neutron router-interface-add dev-router pvt_subnet
