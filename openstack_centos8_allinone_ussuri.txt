@@ -66,3 +66,21 @@ CONFIG_HORIZON_SSL=n
 //install 
 # packstack --answer-file /root/answer.txt --timeout=600
 
+//change configure cinder storage
+# nano /etc/cinder/cinder.config
+...........
+enabled_backends=lvm
+volume_clear = none
+
+[lvm]
+volume_backend_name=lvm
+volume_driver=cinder.volume.drivers.lvm.LVMVolumeDriver
+iscsi_ip_address=192.168.10.10
+iscsi_helper=lioadm
+volume_group=cinder-volumes
+volumes_dir=/var/lib/cinder/volumes
+............
+//restart service cinder
+# systemctl restart openstack-cinder-volume
+# systemctl restart openstack-cinder-api
+
