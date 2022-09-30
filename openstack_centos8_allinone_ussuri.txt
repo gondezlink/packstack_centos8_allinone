@@ -16,7 +16,7 @@
 //install network-script configuration
 #dnf install -y network-scripts
 //change ip address interface to static configuration
-
+#systemctl enable network
 //openstack repositories packstack
 #dnf config-manager --set-enable powertools
 #dnf install -y centos-release-openstack-ussuri
@@ -32,33 +32,39 @@
 #reboot
 
 //install packstack
-#dnf install -y openstack-packstack
+# yum autoremove epel-release
+# yum autoremove openstack-packstack
+# yum clean all
+# dnf install -y openstack-packstack
 #packstack --gen-answer-file /root/answer.txt
+//backup answer.txt menjadi answer.txt.copy
+#cd /root/
+#cp answer.txt answer.txt.copy
+//konfigurasi answer.txt untuk install openstack
 #nano /root/answer.txt
 ..................
 CONFIG_NEUTRON_ML2_MECHANISM_DRIVERS=ovn
 CONFIG_NEUTRON_L2_AGENT=ovn
 CONFIG_NEUTRON_OVN_BRIDGE_MAPPINGS=extnet:br-ex
-CONFIG_NEUTRON_OVN_BRIDGE_IFACES=br-ex:ens3
+CONFIG_NEUTRON_OVN_BRIDGE_IFACES=br-ex:ens3  //sesuaikan ens3 dengan nama interface
 CONFIG_NEUTRON_OVN_BRIDGES_COMPUTE=br-ex
 CONFIG_NEUTRON_OVN_EXTERNAL_PHYSNET=extnet
-CONFIG_SWIFT_STORAGES=/dev/sdc2 //jika hdd ada dua
+CONFIG_SWIFT_STORAGES=/dev/sdb2 //jika hdd ada dua
 CONFIG_SWIFT_STORAGE_FSTYPE=xfs //tipe format hdd untuk swift
 CONFIG_PROVISION_DEMO=n
 CONFIG_HEAT_INSTALL=y
 CONFIG_HEAT_CFN_INSTALL=y
 CONFIG_CEILOMETER_INSTALL=y
 CONFIG_MAGNUM_INSTALL=y
-CONFIG_LBAAS_INSTALL=y
 CONFIG_CINDER_VOLUMES_CREATE=y
 CONFIG_NOVA_SCHED_RAM_ALLOC_RATIO=3.0
 CONFIG_NOVA_LIBVIRT_VIRT_TYPE=%{::default_hypervisor}
 CONFIG_HORIZON_SSL=n
 ..................
 //hdd storage will be on block device /dev/sdb
-# parted -s -a optimal -- /dev/sdc mklabel gpt
-# parted -s -a optimal -- /dev/sdc mkpart primary 0% 70%
-# parted -s -a optimal -- /dev/sdc mkpart primary 70% 100%
+# parted -s -a optimal -- /dev/sdb mklabel gpt
+# parted -s -a optimal -- /dev/sdb mkpart primary 0% 70%
+# parted -s -a optimal -- /dev/sdb mkpart primary 70% 100%
 # pvcreate /dev/sdb1
 # vgcreate cinder-volumes /dev/sdb1
 # lvcreate -l 100%FREE -T cinder-volumes/cinder-volumes-pool
@@ -110,3 +116,11 @@ volumes_dir=/var/lib/cinder/volumes
 # wget https://download.cirros-cloud.net/0.5.2/cirros-0.5.2-x86_64-disk.img
 # openstack image  create --disk-format qcow2 --container-format bare --public --file cirros-0.5.2-x86_64-disk.img cirros
 
+//catatan error
+Error: Function lookup() did not find a value for the name 'DEFAULT_EXEC_TIMEOUT'
+fix :
+#yum autoremove epel-release
+# yum autoremove openstack-packstack
+# yum clean all
+# yum install -y openstack-packstack
+-----------------
