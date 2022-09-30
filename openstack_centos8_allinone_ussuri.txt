@@ -46,7 +46,7 @@
 CONFIG_NEUTRON_ML2_MECHANISM_DRIVERS=ovn
 CONFIG_NEUTRON_L2_AGENT=ovn
 CONFIG_NEUTRON_OVN_BRIDGE_MAPPINGS=extnet:br-ex
-CONFIG_NEUTRON_OVN_BRIDGE_IFACES=br-ex:ens3  //sesuaikan ens3 dengan nama interface
+CONFIG_NEUTRON_OVN_BRIDGE_IFACES=br-ex:ens3  //sesuaikan ens3 dengan nama interface cek dengan perintah ip add
 CONFIG_NEUTRON_OVN_BRIDGES_COMPUTE=br-ex
 CONFIG_NEUTRON_OVN_EXTERNAL_PHYSNET=extnet
 CONFIG_SWIFT_STORAGES=/dev/sdb2 //jika hdd ada dua
