@@ -1,13 +1,13 @@
 #openstack 
 #openstack ussuri
 #allinone machine or single node
-#hostnamectl set-hostname "openstack.gondez.local"
+#hostnamectl set-hostname "openstack.gondez.local" //sesuaikan dengan hostname server anda
 #exec bash
 #hostnamectl
 #putty log H:\Openstack lab\putty_log\&H_&Y&M&D_&T.txt
 
 //config host and hostname
-#echo -e "10.0.2.100\openstack.gondez.local" >> /etc/hosts
+#echo -e "10.0.2.100\openstack.gondez.local" >> /etc/hosts //sesuaikan dengan hostname server anda, ip juga sesuaikan dengan ip address server
 #cat /etc/hosts
 
 //disable network mamager
